@@ -1,7 +1,7 @@
 import React from "react"
 import "./Square.css"
 
-export default class Square extends React.Component {
+const Square = ({onClick, value}) => {
     // constructor(props){ // State 생성 및 초기화. 넘겨받은 인수와 함께 constructor가 먼저 실행됨
     //     super(props); // 자식 클래스 내에서 부모 클래스의 생성자 혹은 매소드를 호출할 때 사용됨
     //     // 생성자는 super 키워드 하나만 생성되거나 this 키워드가 사용되기 전에 호출되어야함
@@ -19,16 +19,15 @@ export default class Square extends React.Component {
     // }// this 쓰기전에는 super먼저 써주고 super 안에는 props를 담아줘라~~
 
     //리액트에서 데이터가 변할 때 화면을 다시 렌더링 해주기 위해서는 React State를 사용해야 함
-    render(){
-        return (
-            <button className="square"
-                onClick={() => {this.props.onClick() }} 
-            >
-                {this.props.value} 
-            </button> 
-        )
-    }  }
+    return (
+        <button className="square" onClick={onClick}>
+            {value} 
+        </button> 
+    )
+} 
 
+
+export default Square
 //  - Props (부모에서자녀로)
 //  Props는 상속하는 부모 컴포넌트로부터 자녀 컴포넌트에 데이터등을 전달하는 방법
 //  Props는 읽기전용으로 자녀 컴포넌트에서는 변하지 않는다. 변하게 하려면 부모 컴포넌트에서 state를 변경해야한다.

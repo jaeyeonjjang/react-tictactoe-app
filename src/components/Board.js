@@ -1,52 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Square from './Square'
 import "./Board.css"
 
-export default class Board extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state ={
-            squares: Array(9).fill(null)
-        }
+const Board = ({squares, onClick}) => {
+    const renderSquare = (i) => {
+        return <Square value={squares[i]} 
+            onClick={() => onClick(i)}/>
     }
 
-    handleClick(i){
-        const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({squares: squares});
-    }
-
-
-    renderSquare(i) {
-        return <Square value={this.state.squares[i]} 
-            onClick={()=> this.handleClick(i)}/>
-    }
-
-  render() {
     return (
       <div>
-        <div className='status'>Next Player: X, O</div>
         <div className='board-row'>
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
+            {renderSquare(0)}
+            {renderSquare(1)}
+            {renderSquare(2)}
         </div>
         <div className='board-row'>
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
+            {renderSquare(3)}
+            {renderSquare(4)}
+            {renderSquare(5)}
         </div>
         <div className='board-row'>
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
+            {renderSquare(6)}
+            {renderSquare(7)}
+            {renderSquare(8)}
         </div>
       </div>
     )
-  }
 }
 
+export default Board
 
 // 원시타입 - Boolean, String, Number, null, undefined, Symbol
 // 불변성을 가지고 있음.
@@ -59,3 +42,16 @@ export default class Board extends Component {
 // 데이터 값이 변하면 Call Stack 에서는 그대로지만 Heap 메모리의 값만 바뀌는거임
 // 배열은 그냥 아예 새로운 배열을 반환하는 메소드를 사용하자 ..
 // splice, push 는 원본 데이터를 변경함
+
+
+// HOC란?
+// Higher Order Component 의 약자로
+// 컴포넌트를 인자로 받아서 새로운 리액트 컴포넌트를 리턴하는 함수
+// 너무 많은 HOC를 사용하게 되면 Wrapper가 너무 많아짐
+// 그래서 HOC 대신에 따로 Custom Hooks를 이용해서 컴포넌트를 만들어서 처리해줌
+// Hooks 에서 State를 업데이트 해주려면 const [name, setName ] = useState("");
+
+// Class 컴포넌트와 비교했을 때 함수형 컴포넌트의 장점
+// 1. 더 짧고 간결한 코드
+// 2. 더 빠른 성능
+// 3. 더 나은 가독성
